@@ -20,15 +20,52 @@ namespace CapaVisual
 
         private void BotonInsertar_Click(object sender, EventArgs e)
         {
-            HamburguesaController.Crear(TextBoxNombre.Text, Int32.Parse(TextBoxPrecio.Text));
+            HamburguesaController.Crear(
+                TextBoxNombre.Text, 
+                Int32.Parse(TextBoxPrecio.Text)
+            );
             MessageBox.Show("Insertado");
+            this.recargarDatagrid();
         }
 
-        private void Listar_Click(object sender, EventArgs e)
+        private void recargarDatagrid()
         {
-            DataTable datos = HamburguesaController.Obtener();
+            dataGridView1.Refresh();
+            DataTable datos = HamburguesaController.ObtenerTodos();
 
             dataGridView1.DataSource = datos;
+        }
+        private void Listar_Click(object sender, EventArgs e)
+        {
+            this.recargarDatagrid();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            int id = Int32.Parse(dataGridView1.SelectedRows[0].Cells["id"].Value.ToString());
+            CapaLogica.HamburguesaController.Eliminar(id);
+            MessageBox.Show("Eliminado");
+            this.recargarDatagrid();
+        }
+
+        private void Modificar_Click(object sender, EventArgs e)
+        {
+            HamburguesaController.Modificar(
+                Int32.Parse(TextBoxId.Text), 
+                TextBoxNombre.Text, 
+                Int32.Parse(TextBoxPrecio.Text)
+            );
+            MessageBox.Show("Modificado");
+            this.recargarDatagrid();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) { 
+           
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.recargarDatagrid();
         }
     }
 }

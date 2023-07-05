@@ -17,11 +17,29 @@ namespace CapaLogica
             hamburguesa.Nombre = nombre;
             hamburguesa.Precio = precio;
 
-            hamburguesa.Save();
+            hamburguesa.Guardar();
 
         }
 
-        public static DataTable Obtener()
+        public static void Eliminar(int id)
+        {
+            HamburguesaModel h = new HamburguesaModel();
+            h.Obtener(id);
+            h.Eliminar();
+        }
+
+        public static void Modificar(int id, string nombre, int precio)
+        {
+            HamburguesaModel h = new HamburguesaModel();
+            h.Obtener(id);
+
+            h.Nombre = nombre;
+            h.Precio = precio;
+
+            h.Guardar();
+        }
+
+        public static DataTable ObtenerTodos()
         {
             HamburguesaModel h = new HamburguesaModel();
             List<HamburguesaModel> hamburguesas = h.Todos();

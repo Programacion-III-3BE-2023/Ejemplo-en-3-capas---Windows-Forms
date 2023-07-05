@@ -21,7 +21,7 @@ namespace CapaDeDatos
         {
             this.DatabaseIp = "192.168.241.1";
             this.DatabaseUser = "root";
-            this.DatabasePassword = "root";
+            this.DatabasePassword = "1234";
             this.DatabaseName = "modelos";
 
             this.Connection = new MySqlConnection(            
